@@ -29,6 +29,7 @@ def _webhook_secret_value() -> str:
         _secret_client = secretmanager.SecretManagerServiceClient()
     name = f"projects/{_PROJECT}/secrets/github-webhook-secret/versions/latest"
     _webhook_secret = _secret_client.access_secret_version(name=name).payload.data.decode("utf-8")
+    logger.info(f"webhook secret fingerprint: {hashlib.sha256(_webhook_secret.encode()).hexdigest()[:12]}, len={len(_webhook_secret)}, project ={_PROJECT}")
     return _webhook_secret
 
 
