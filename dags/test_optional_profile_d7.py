@@ -14,8 +14,7 @@ def find_primary_address(customer):
 
 def format_shipping_label(customer):
     address = find_primary_address(customer)
-    return f"{customer['name']} -> {address.get('line')}"
-
+    return f"{customer['name']} -> {address.get('line') if address else 'N/A'}"
 
 def build_shipping_batch(customers):
     return [format_shipping_label(c) for c in customers]
