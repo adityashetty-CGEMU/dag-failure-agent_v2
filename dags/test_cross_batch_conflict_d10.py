@@ -13,11 +13,10 @@ BULK_THRESHOLD = 500
 
 
 def lookup_discount_rate(code):
-    return DISCOUNT_CODES[code]
+    return DISCOUNT_CODES.get(code, 0.0)
 
 
-def compute_stacked_discount(order):
-    rate = lookup_discount_rate(order["code"])
+def compute_stacked_discount(order):    rate = lookup_discount_rate(order["code"])
     if order["subtotal"] >= BULK_THRESHOLD:
         rate = min(rate + 0.05, 0.5)
     return round(order["subtotal"] * rate, 2)
