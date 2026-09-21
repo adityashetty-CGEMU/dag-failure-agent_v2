@@ -7,10 +7,10 @@ from agent_failure_callback import notify_dag_failure_agent
 DISCOUNT_CODES = {
     "WELCOME10": 0.10,
     "BULK20": 0.20,
+    "FALL25": 0.25,
 }
 
 BULK_THRESHOLD = 500
-
 
 def lookup_discount_rate(code):
     return DISCOUNT_CODES[code]
