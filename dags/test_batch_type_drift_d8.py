@@ -50,3 +50,7 @@ with DAG(
         task_id="run_sensor_summary",
         python_callable=run_sensor_summary,
     )
+
+
+# agent fix could not be applied automatically
+# UnidiffParseError: Hunk is shorter than expected
