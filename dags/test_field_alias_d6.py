@@ -38,3 +38,7 @@ with DAG(
         task_id="run_contact_sync",
         python_callable=run_contact_sync,
     )
+
+
+# agent fix could not be applied automatically
+# UnidiffParseError: Hunk is shorter than expected
