@@ -10,6 +10,11 @@ _PROJECT = os.environ.get("GCP_PROJECT")
 _LOCATION = os.environ.get("GCP_LOCATION", "global")
 
 
+_PRICE_IN_PER_M = float(os.environ.get("GEMINI_FLASH_INPUT_PRICE_PER_M_USD", "0.30"))
+_PRICE_IN_OUT_M = float(os.environ.get("GEMINI_FLASH_OUTPUT_PRICE_PER_M_USD", "2.50"))
+_USD_TO_CAD = float(os.environ.get("FX_USD_TO_CAD","1.41"))
+
+
 def _genai():
     global _GENAI_CLIENT
     if _GENAI_CLIENT is None:

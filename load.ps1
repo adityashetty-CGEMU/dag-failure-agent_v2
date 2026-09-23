@@ -1,6 +1,6 @@
 param(
-    [string]$Project = "dag-failure-agent-v2",
-    [string]$DashboardUrl = "https://dag-failure-agent-692925158254.us-central1.run.app"
+    [string]$Project = "dag-failure-agent-v2-cap",
+    [string]$DashboardUrl = "https://dag-failure-agent-2fmimiwomq-pd.a.run.app"
 )
 
 Write-Host "Active gcloud account:"

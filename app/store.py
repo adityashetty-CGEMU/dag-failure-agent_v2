@@ -79,3 +79,21 @@ def get_weights() -> dict:
 
 def save_weights(cfg: dict):
     _db().collection("config").document("weights").set(cfg, merge=True)
+
+
+def create_run_if_new(doc_id: str, fields: dict) -> bool:
+
+    ref = _db().collection("run").document(doc_id)
+
+    @firestore.transactional
+    def _txn(transaction):
+        snap = ref.get(transaction=transaction)
+        if snap.exists:
+            return False
+        now = datetime.now(timezone.utc).isoformat()
+        data["created_at"] =  now
+        data["updated_at"] = now
+        transaction.set(ref, data)
+        return True
+
+    return _txn(_db().transaction())

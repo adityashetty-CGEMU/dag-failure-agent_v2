@@ -27,7 +27,7 @@ button.danger:disabled { background: #ccc; cursor: default; }
   <span id="runs-selected-count"></span>
 </div>
 <table id="runs"><thead>
-<tr><th></th><th>dag_id</th><th>task_id</th><th>run_id</th><th>status</th><th>confidence</th><th>PR</th></tr>
+<tr><th></th><th>dag_id</th><th>task_id</th><th>run_id</th><th>status</th><th>confidence</th><th>created</th><th>cost (CAD/USD)</th><th>PR</th></tr>
 </thead><tbody></tbody></table>
 
 <h2>Weights</h2>
@@ -60,9 +60,13 @@ async function loadRuns() {
   body.innerHTML = '';
   for (const r of runs) {
     const pr = r.pr_url ? `<a href="${r.pr_url}" target="_blank">#${r.pr_number}</a>` : '';
+    const created = r.created_at ? new Date(r.created_at).toLocaleString() : '';
+    const cost = r.cost_usd != null ? `$${r.cost_usd.toFixed(4)} / $${r.cost_cad.toFixed(4)} CAD` : '';
+    const status = r.gate_reason ? `${r.status} (${r.gate_reason})` : (r.status || '');
     body.innerHTML += `<tr><td><input type="checkbox" class="run-select" data-id="${r.id}"></td>`
       + `<td>${r.dag_id||''}</td><td>${r.task_id||''}</td><td>${r.run_id||''}</td>`
-      + `<td>${r.status||''}</td><td>${r.confidence_score ?? ''}</td><td>${pr}</td></tr>`;
+      + `<td>${r.status||''}</td><td>${r.confidence_score ?? ''}</td><td>${pr}</td></tr>`
+      + `<td>${created}</td><td>${cost}</td><td>${pr}</td></tr>;
   }
   document.querySelectorAll('.run-select').forEach(cb => { cb.onchange = updateRunsButton; });
   updateRunsButton();
