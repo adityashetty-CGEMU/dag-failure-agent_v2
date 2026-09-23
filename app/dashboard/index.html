@@ -65,8 +65,8 @@ async function loadRuns() {
     const status = r.gate_reason ? `${r.status} (${r.gate_reason})` : (r.status || '');
     body.innerHTML += `<tr><td><input type="checkbox" class="run-select" data-id="${r.id}"></td>`
       + `<td>${r.dag_id||''}</td><td>${r.task_id||''}</td><td>${r.run_id||''}</td>`
-      + `<td>${r.status||''}</td><td>${r.confidence_score ?? ''}</td><td>${pr}</td></tr>`
-      + `<td>${created}</td><td>${cost}</td><td>${pr}</td></tr>;
+      + `<td>${r.status||''}</td><td>${r.confidence_score ?? ''}</td>`
+      + `<td>${created}</td><td>${cost}</td><td>${pr}</td></tr>`;
   }
   document.querySelectorAll('.run-select').forEach(cb => { cb.onchange = updateRunsButton; });
   updateRunsButton();
