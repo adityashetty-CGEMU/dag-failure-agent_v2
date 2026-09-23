@@ -9,7 +9,8 @@ def parse_record_value(record):
     return int(record["value"])
 
 
-def total_daily_volume(records):    total = 0
+def total_daily_volume(records):    
+    total = 0
     for record in records:
         total += parse_record_value(record)
     return total
