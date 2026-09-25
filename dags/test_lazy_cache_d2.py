@@ -13,11 +13,10 @@ class Connection:
         return f"ran '{query}' on {self.name}"
 
 
-_CONNECTION_CACHE = {}
+_CONNECTION_CACHE = {"warehouse": Connection("warehouse")}
 
 
-def get_connection(name):
-    return _CONNECTION_CACHE.get(name)
+def get_connection(name):    return _CONNECTION_CACHE.get(name)
 
 
 def run_query_on(name, query):
